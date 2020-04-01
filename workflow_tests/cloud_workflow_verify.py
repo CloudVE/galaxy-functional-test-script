@@ -34,11 +34,10 @@ if len(gi.histories.get_current_history()['state_ids']['ok']) == 9 and len(gi.hi
         filecmp.cmp("test.txt", "outfile.txt", shallow = False) == True
     except:
         exit("WF test failed: files do not match")
-    print("HELLOWORLD")
     sys.exit(0)
-    print("GOODBYEWORLD")
 else:
     if attempt_count < 10:
         sleep(6)
+        attempt_count += 1
     else:
         raise Exception("Took more than a minute to find dataset. WF likely didn't complete.")
