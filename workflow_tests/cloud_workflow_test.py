@@ -11,6 +11,7 @@ except: pass
 parser = argparse.ArgumentParser()
 parser.add_argument("-a", "--api_key", type=str, help="Galaxy API token")
 parser.add_argument("-g", "--galaxy_url", type=str, help="URL for galaxy instance. On cloudman instance, must use extension as well as domain")
+parser.add_argument("-w", "--workflow", type=str, help="workflow file")
 parser.add_argument("-1", "--file1", type=str, help="Data link 1")
 parser.add_argument("-2", "--file2", type=str, help="Data link 2")
 args = parser.parse_args()
@@ -19,9 +20,10 @@ api_key = args.api_key
 galaxy_url = args.galaxy_url
 file1 = args.file1
 file2 = args.file2
+workflow = args.workflow
 
 #Connect to Galaxy
-gi = GalaxyInstance(url=galaxy_url, key=api_key)
+gi = GalaxyInstance(url=galaxy_url, key=api_key, verify=False)
 
 #Download data and upload to Galaxy
 ## UN-HARD CODE LATER
@@ -42,7 +44,7 @@ for x in range(0, len(peek)):
     data_inputs[str(x)] = {"id": peek[x]["id"], "src": 'hda'}
 
 #Download workflow
-gi.workflows.import_workflow_from_local_path("./Downloads/Galaxy-Workflow-cloud_test_wf.ga") #Change based on how retrieving the workflow
+gi.workflows.import_workflow_from_local_path(workflow) #Change based on how retrieving the workflow
 wf_id = dict(gi.workflows.get_workflows(name="cloud test wf")[0])["id"]
 
 # #Invoke WF
