@@ -14,16 +14,18 @@ parser.add_argument("-g", "--galaxy_url", type=str, help="URL for galaxy instanc
 parser.add_argument("-w", "--workflow", type=str, help="workflow file")
 parser.add_argument("-1", "--file1", type=str, help="Data link 1")
 parser.add_argument("-2", "--file2", type=str, help="Data link 2")
+parser.add_argument("-e", "--verify", action="store_true", help="Require verification from Galaxy server")
 args = parser.parse_args()
 
 api_key = args.api_key
 galaxy_url = args.galaxy_url
 file1 = args.file1
 file2 = args.file2
+ver = args.verify
 workflow = args.workflow
 
 #Connect to Galaxy
-gi = GalaxyInstance(url=galaxy_url, key=api_key, verify=False)
+gi = GalaxyInstance(url=galaxy_url, key=api_key, verify = ver)
 
 #Download data and upload to Galaxy
 ## UN-HARD CODE LATER
