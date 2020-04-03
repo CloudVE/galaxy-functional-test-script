@@ -46,8 +46,8 @@ for x in range(0, len(peek)):
     data_inputs[str(x)] = {"id": peek[x]["id"], "src": 'hda'}
 
 #Download workflow
-gi.workflows.import_workflow_from_local_path(workflow) #Change based on how retrieving the workflow
-wf_id = dict(gi.workflows.get_workflows(name="cloud test wf")[0])["id"]
+gi.workflows.import_workflow_from_local_path(workflow)
+wf_id = dict(gi.workflows.get_workflows()[0])["id"] #Specify workflow name here if so desired
 
 # #Invoke WF
 gi.workflows.invoke_workflow(workflow_id = wf_id, inputs = data_inputs, history_id = history_id)
