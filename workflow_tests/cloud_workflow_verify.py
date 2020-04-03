@@ -52,5 +52,4 @@ while attempt_count <= 10:
             sleep(6)
             attempt_count += 1
         else:
-            print("NOPE")
             raise Exception("Took more than a minute to find dataset. WF likely didn't complete.")
